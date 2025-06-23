@@ -1,0 +1,369 @@
+<!DOCTYPE html><html lang="en" class="scroll-smooth"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><title>Portfolio – Yash</title><meta name="description" content="Welcome to my site"><!-- 💡  THEME SCRIPT — runs before first paint --><script>
+(() => {
+  const root   = document.documentElement;
+  const mqDark = window.matchMedia('(prefers-color-scheme: dark)');
+  
+  const fire   = () => window.dispatchEvent(new Event('themechange'));
+
+  // Apply a given mode ('light', 'dark', or 'system')
+  function applyTheme(mode) {
+    const isDark = mode === 'dark' || (mode === 'system' && mqDark.matches);
+    root.classList.toggle('dark', isDark);
+    fire();
+  }
+
+  // Expose the toggle helper for your ThemeToggle component
+  window.setTheme = mode => {
+    if (mode === 'system') {
+      localStorage.removeItem('theme');
+    } else {
+      localStorage.setItem('theme', mode);
+    }
+    applyTheme(mode);
+  };
+
+  // If the OS theme flips and the user hasn’t overridden, keep in sync
+  mqDark.addEventListener('change', () => {
+    if (!localStorage.getItem('theme')) {
+      applyTheme('system');
+    }
+  });
+
+  // On first paint, use stored preference or fall back to system
+  const stored = localStorage.getItem('theme');
+  applyTheme(stored || 'system');
+})();
+</script><link rel="stylesheet" href="/_astro/index.BD9FAQva.css"></head> <body class="scroll-smooth"> <header class="
+    sticky top-0 z-30
+    backdrop-blur-md
+    
+    text-[color:var(--text)]      
+    
+  "> <nav class="mx-auto max-w-7xl flex items-center justify-between px-6 py-4"> <!-- Brand --> <a href="/" class="text-lg font-bold tracking-tight">Yash Patel</a> <!-- Desktop links --> <ul class="hidden md:flex gap-8 text-sm font-medium"> <li> <a href="#" class="relative after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5
+                   after:origin-left after:scale-x-0 after:bg-current after:transition-transform
+                   hover:after:scale-x-100"> Home </a> </li><li> <a href="#professional-experience" class="relative after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5
+                   after:origin-left after:scale-x-0 after:bg-current after:transition-transform
+                   hover:after:scale-x-100"> Hire me </a> </li><li> <a href="#photography" class="relative after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5
+                   after:origin-left after:scale-x-0 after:bg-current after:transition-transform
+                   hover:after:scale-x-100"> Photography </a> </li> </ul> <!-- Theme toggle --> <button id="theme-btn" aria-label="Toggle colour scheme" class="p-2 rounded-full border select-none"> <span id="theme-icon">☀️</span> </button> <script>
+  
+(() => {
+  const btn   = document.getElementById('theme-btn');
+  const icon  = document.getElementById('theme-icon');
+  const mq    = matchMedia('(prefers-color-scheme: dark)');
+
+  /* ---------- paint helper ---------- */
+  const paint = () => {
+    const stored = localStorage.getItem('theme');
+    const isDark = stored
+      ? stored === 'dark'
+      : mq.matches;
+    icon.textContent = isDark ? '🌙' : '☀️';
+  };
+
+  paint();                         //  initial
+
+  /* ---------- click → cycle ---------- */
+  btn.addEventListener('click', () => {
+    const stored = localStorage.getItem('theme') ?? 'system';
+    const next   = stored === 'light' ? 'dark'
+                : stored === 'dark'  ? 'system'
+                : 'light';
+    window.setTheme(next);         // delegates to the bootstrap helper
+  });
+
+  /* ---------- repaint on any change ---------- */
+  window.addEventListener('themechange', paint);  // fired by bootstrap
+  window.addEventListener('storage',     paint);  // other tabs
+  mq.addEventListener('change',          paint);  // OS / DevTools if in 'system'
+})();
+</script> <!-- Mobile hamburger --> <button id="menu-btn" class="md:hidden p-2 ml-2 -mr-2 rounded-full z-50 relative
+             text-[color:var(--text)]
+             hover:bg-black/5 dark:hover:bg-white/10" aria-label="Open navigation"> <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 6h18M3 12h18M3 18h18"></path> </svg> </button> </nav> <!-- Mobile slide-down --> <div id="mobile-menu" class="md:hidden translate-y-[-100%] opacity-0 invisible
+           transition-all duration-300
+           bg-[color:var(--bg)]/90 dark:bg-[color:var(--bg)]/90 backdrop-blur-md"> <ul class="flex flex-col divide-y divide-black/5 dark:divide-white/5"> <li><a href="#" class="block px-6 py-.5">Home</a></li><li><a href="#professional-experience" class="block px-6 py-.5">Hire me</a></li><li><a href="#photography" class="block px-6 py-.5">Photography</a></li> </ul> </div> <!-- Drawer toggle --> <script>
+    const btn   = document.getElementById('menu-btn');
+    const panel = document.getElementById('mobile-menu');
+
+    btn?.addEventListener('click', () => {
+      panel.classList.toggle('translate-y-0');
+      panel.classList.toggle('opacity-100');
+      panel.classList.toggle('visible');
+      btn.querySelector('svg')?.classList.toggle('rotate-90');
+    });
+  </script> </header> <!-- Page content injected here -->  <section id="hero" class="mx-auto max-w-7xl px-6 py-6 
+         md:grid md:grid-cols-2 md:gap-12 
+         items-center"> <!-- ✨ TEXT – left column --> <div class="space-y-6"> <h1 class="
+      text-5xl font-extrabold leading-tight 
+      opacity-0 -translate-x-6
+      transition-all duration-700 ease-out
+      delay-0
+      motion-reduce:opacity-100 motion-reduce:translate-x-0
+    " data-fade> Hey, I&#39;m Yash! </h1> <h2 class="
+      text-4xl font-semibold 
+      opacity-0 -translate-x-6
+      transition-all duration-700 ease-out
+      delay-100                       <!-- 0.1 s later -->
+      motion-reduce:opacity-100 motion-reduce:translate-x-0
+    " data-fade> Welcome to my website. </h2> <p class="
+    text-lg  
+    opacity-0 -translate-x-6
+    transition-all duration-700 ease-out
+    delay-200                       <!-- 0.2 s later -->
+    motion-reduce:opacity-100 motion-reduce:translate-x-0
+  " data-fade>I'm a computer scientist from Sault Ste. Marie, Ontario, with a Bachelor of Computing Honours from <a href='https://www.queensu.ca/' target=_blank class='underline hover:opacity-80'>Queen's University</a>. My experience covers software design, AI and machine learning, cyber security, and data analytics. I enjoy solving challenging puzzles, creating innovative software solutions, and exploring <a href='https://piwigo.darkishlocket10.me' target=_blank class='underline hover:opacity-80'>photography</a> in my spare time. Please feel free to explore my portfolio and <a href='mailto:yashnilay@gmail.com' target=_blank class='underline hover:opacity-80'>reach out</a> if you'd like to collaborate!</p> <!-- SOCIAL ICON LINKS --> <div class="flex items-center gap-6 mt-8 
+              opacity-0 -translate-x-6
+              transition-all duration-700 ease-out
+              delay-0                       <!-- 0 s later -->
+              motion-reduce:opacity-100 motion-reduce:translate-x-0
+              " data-fade> <a href="https://linkedin.com/in/yash-n-patel" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="text-current hover:opacity-80 transition-opacity"> <svg width="38" height="38" data-icon="simple-icons:linkedin">   <symbol id="ai:simple-icons:linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037c-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85c3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.06 2.06 0 0 1-2.063-2.065a2.064 2.064 0 1 1 2.063 2.065m1.782 13.019H3.555V9h3.564zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0z"/></symbol><use href="#ai:simple-icons:linkedin"></use>  </svg> </a><a href="https://github.com/DarkishLocket10" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="text-current hover:opacity-80 transition-opacity"> <svg width="38" height="38" data-icon="simple-icons:github">   <symbol id="ai:simple-icons:github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol><use href="#ai:simple-icons:github"></use>  </svg> </a><a href="https://twitter.com/yashnilaypatel" target="_blank" rel="noopener noreferrer" aria-label="X" class="text-current hover:opacity-80 transition-opacity"> <svg width="38" height="38" data-icon="simple-icons:x">   <symbol id="ai:simple-icons:x" viewBox="0 0 24 24"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584l-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></symbol><use href="#ai:simple-icons:x"></use>  </svg> </a><a href="https://instagram.com/yash_patel14" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-current hover:opacity-80 transition-opacity"> <svg width="38" height="38" data-icon="simple-icons:instagram">   <symbol id="ai:simple-icons:instagram" viewBox="0 0 24 24"><path fill="currentColor" d="M7.03.084c-1.277.06-2.149.264-2.91.563a5.9 5.9 0 0 0-2.124 1.388a5.9 5.9 0 0 0-1.38 2.127C.321 4.926.12 5.8.064 7.076s-.069 1.688-.063 4.947s.021 3.667.083 4.947c.061 1.277.264 2.149.563 2.911c.308.789.72 1.457 1.388 2.123a5.9 5.9 0 0 0 2.129 1.38c.763.295 1.636.496 2.913.552c1.278.056 1.689.069 4.947.063s3.668-.021 4.947-.082c1.28-.06 2.147-.265 2.91-.563a5.9 5.9 0 0 0 2.123-1.388a5.9 5.9 0 0 0 1.38-2.129c.295-.763.496-1.636.551-2.912c.056-1.28.07-1.69.063-4.948c-.006-3.258-.02-3.667-.081-4.947c-.06-1.28-.264-2.148-.564-2.911a5.9 5.9 0 0 0-1.387-2.123a5.9 5.9 0 0 0-2.128-1.38c-.764-.294-1.636-.496-2.914-.55C15.647.009 15.236-.006 11.977 0S8.31.021 7.03.084m.14 21.693c-1.17-.05-1.805-.245-2.228-.408a3.7 3.7 0 0 1-1.382-.895a3.7 3.7 0 0 1-.9-1.378c-.165-.423-.363-1.058-.417-2.228c-.06-1.264-.072-1.644-.08-4.848c-.006-3.204.006-3.583.061-4.848c.05-1.169.246-1.805.408-2.228c.216-.561.477-.96.895-1.382a3.7 3.7 0 0 1 1.379-.9c.423-.165 1.057-.361 2.227-.417c1.265-.06 1.644-.072 4.848-.08c3.203-.006 3.583.006 4.85.062c1.168.05 1.804.244 2.227.408c.56.216.96.475 1.382.895s.681.817.9 1.378c.165.422.362 1.056.417 2.227c.06 1.265.074 1.645.08 4.848c.005 3.203-.006 3.583-.061 4.848c-.051 1.17-.245 1.805-.408 2.23c-.216.56-.477.96-.896 1.38a3.7 3.7 0 0 1-1.378.9c-.422.165-1.058.362-2.226.418c-1.266.06-1.645.072-4.85.079s-3.582-.006-4.848-.06m9.783-16.192a1.44 1.44 0 1 0 1.437-1.442a1.44 1.44 0 0 0-1.437 1.442M5.839 12.012a6.161 6.161 0 1 0 12.323-.024a6.162 6.162 0 0 0-12.323.024M8 12.008A4 4 0 1 1 12.008 16A4 4 0 0 1 8 12.008"/></symbol><use href="#ai:simple-icons:instagram"></use>  </svg> </a><a href="https://trakt.tv/users/darkishlocket10" target="_blank" rel="noopener noreferrer" aria-label="Trakt" class="text-current hover:opacity-80 transition-opacity"> <svg width="38" height="38" data-icon="simple-icons:trakt">   <symbol id="ai:simple-icons:trakt" viewBox="0 0 24 24"><path fill="currentColor" d="m15.082 15.107l-.73-.73l9.578-9.583a5 5 0 0 0-.115-.575L13.662 14.382l1.08 1.08l-.73.73l-1.81-1.81l11.22-11.238c-.075-.15-.155-.3-.25-.44L11.508 14.377l2.154 2.155l-.73.73l-7.193-7.199l.73-.73l4.309 4.31L22.546 1.86A5.62 5.62 0 0 0 18.362 0H5.635A5.637 5.637 0 0 0 0 5.634V18.37A5.63 5.63 0 0 0 5.635 24h12.732C21.477 24 24 21.48 24 18.37V6.19l-8.913 8.918zm-4.314-2.155L6.814 8.988l.73-.73l3.954 3.96zm1.075-1.084l-3.954-3.96l.73-.73l3.959 3.96zm9.853 5.688a4.14 4.14 0 0 1-4.14 4.14H6.438a4.144 4.144 0 0 1-4.139-4.14V6.438A4.14 4.14 0 0 1 6.44 2.3h10.387v1.04H6.438a3.1 3.1 0 0 0-3.099 3.1v11.11c0 1.71 1.39 3.105 3.1 3.105h11.117c1.71 0 3.1-1.395 3.1-3.105v-1.754h1.04v1.754z"/></symbol><use href="#ai:simple-icons:trakt"></use>  </svg> </a><a href="https://www.youtube.com/@yashpateliscool" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="text-current hover:opacity-80 transition-opacity"> <svg width="38" height="38" data-icon="simple-icons:youtube">   <symbol id="ai:simple-icons:youtube" viewBox="0 0 24 24"><path fill="currentColor" d="M23.498 6.186a3.02 3.02 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.02 3.02 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.02 3.02 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.02 3.02 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></symbol><use href="#ai:simple-icons:youtube"></use>  </svg> </a><a href="https://www.goodreads.com/darkishlocket10" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="text-current hover:opacity-80 transition-opacity"> <svg width="38" height="38" data-icon="simple-icons:goodreads">   <symbol id="ai:simple-icons:goodreads" viewBox="0 0 24 24"><path fill="currentColor" d="M11.43 23.995c-3.608-.208-6.274-2.077-6.448-5.078c.695.007 1.375-.013 2.07-.006c.224 1.342 1.065 2.43 2.683 3.026c1.583.496 3.737.46 5.082-.174c1.351-.636 2.145-1.822 2.503-3.577c.212-1.042.236-1.734.231-2.92l-.005-1.631h-.059c-1.245 2.564-3.315 3.53-5.59 3.475c-5.74-.054-7.68-4.534-7.528-8.606c.01-5.241 3.22-8.537 7.557-8.495c2.354-.14 4.605 1.362 5.554 3.37l.059.002l.002-2.918l2.099.004l-.002 15.717c-.193 7.04-4.376 7.89-8.209 7.811zm6.1-15.633c-.096-3.26-1.601-6.62-5.503-6.645c-3.954-.017-5.625 3.592-5.604 6.85c-.013 3.439 1.643 6.305 4.703 6.762c4.532.591 6.551-3.411 6.404-6.967"/></symbol><use href="#ai:simple-icons:goodreads"></use>  </svg> </a> <!-- contact button yashnilay@gmail.com, with the simple-icons mail icon --> <a href="mailto:yashnilay@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Email me" class="flex items-center gap-2 px-4 py-2 border  rounded-lg  hover:bg-[#9C84EE]/10 transition-colors"> <svg width="24" height="24" data-icon="simple-icons:maildotru">   <symbol id="ai:simple-icons:maildotru" viewBox="0 0 24 24"><path fill="currentColor" d="M15.61 12c0 1.99-1.62 3.61-3.61 3.61S8.39 13.99 8.39 12S10.01 8.39 12 8.39s3.61 1.62 3.61 3.61M12 0C5.383 0 0 5.383 0 12s5.383 12 12 12c2.424 0 4.761-.722 6.76-2.087l.034-.024l-1.617-1.879l-.027.017A9.5 9.5 0 0 1 12 21.54c-5.26 0-9.54-4.28-9.54-9.54S6.74 2.46 12 2.46s9.54 4.28 9.54 9.54a9.6 9.6 0 0 1-.225 2.05c-.301 1.239-1.169 1.618-1.82 1.568c-.654-.053-1.42-.52-1.426-1.661V12A6.076 6.076 0 0 0 12 5.93A6.076 6.076 0 0 0 5.93 12A6.076 6.076 0 0 0 12 18.07a6.02 6.02 0 0 0 4.3-1.792a3.9 3.9 0 0 0 3.32 1.805c.874 0 1.74-.292 2.437-.821c.719-.547 1.256-1.336 1.553-2.285c.047-.154.135-.504.135-.507l.002-.013c.175-.76.253-1.52.253-2.457c0-6.617-5.383-12-12-12"/></symbol><use href="#ai:simple-icons:maildotru"></use>  </svg> <span class="font-medium">Contact</span> </a> </div> </div> <!-- 📸 IMAGE – right column --> <figure data-tilt class="
+    mt-10 md:mt-0 relative
+    opacity-0 translate-x-6         
+    transition-all duration-700 ease-out
+    motion-reduce:opacity-100 motion-reduce:translate-y-0
+  " data-fade style="perspective: 1200px"> <img id="parallax-img" src="/src/images/about.jpg" alt="Photo of Yash Patel" loading="lazy" class="w-full rounded-3xl object-cover
+           transition-transform duration-200 ease-out
+           will-change-transform"> <script>
+    const fig   = /** @type {HTMLElement} */ (document.currentScript.parentElement);
+    const img   = fig.querySelector('#parallax-img');
+    const range = 12;                  // max degrees of tilt
+
+    function handleMove(e) {
+      const rect = fig.getBoundingClientRect();
+      const x    = e.clientX - rect.left - rect.width  / 2; // center origin
+      const y    = e.clientY - rect.top  - rect.height / 2;
+      const rx   = (-y / (rect.height / 1.25)) * range;        // invert for natural tilt
+      const ry   = ( x / (rect.width  / 1.25)) * range;
+      img.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.05)`;
+    }
+
+    function reset() {
+      img.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+    }
+
+    fig.addEventListener('mousemove', handleMove);
+    fig.addEventListener('mouseleave', reset);
+  </script> </figure> </section> <section id="education" class="mx-auto max-w-7xl px-6 py-14
+  opacity-0 -translate-x-6
+  transition-all duration-700 ease-out
+  delay-400
+  motion-reduce:opacity-100 motion-reduce:translate-y-0
+  " data-fade> <h2 class="text-5xl font-extrabold "> Education </h2> <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-12
+  opacity-0 -translate-x-6
+  transition-all duration-700 ease-out
+  delay-500
+  motion-reduce:opacity-100 motion-reduce:translate-y-0
+  " data-fade> <div class="relative pl-8">  <div class="absolute inset-y-0 left-0 w-4 bg-[#9C84EE] transform -skew-x-12"></div>  <div class="relative z-10"> <span class="text-sm ">2020–2025</span> <h3 class="mt-2 text-2xl font-semibold "> Queen&#39;s University </h3> <p class="mt-1 "> Bachelor of Computing (Honours), Specialization in Software Design </p> </div> </div><div class="relative pl-8">  <div class="absolute inset-y-0 left-0 w-4 bg-[#9C84EE] transform -skew-x-12"></div>  <div class="relative z-10"> <span class="text-sm ">2016–2020</span> <h3 class="mt-2 text-2xl font-semibold "> Korah Collegiate &amp; Vocational School </h3> <p class="mt-1 "> High School Diploma, Academic Stream </p> </div> </div> </div> </section> <section id="professional-experience" class="mx-auto max-w-7xl px-6 py-24 
+         md:grid md:grid-cols-2 md:gap-12 
+         items-center"> <!-- 📸 IMAGE – left on desktop --> <figure data-tilt class="
+      mt-10 md:mt-0 relative
+      opacity-0 -translate-x-6         /* enter from left */
+      transition-all duration-700 ease-out
+        delay-800                        /* 0.8 s later */
+      motion-reduce:opacity-100 motion-reduce:translate-x-0
+      order-2 md:order-1               /* mobile: below, md+: first */
+    " data-fade style="perspective: 1200px"> <img id="parallax-img" src="/src/images/Professional.jpg" alt="Yash taking a photo" loading="lazy" class="w-full rounded-3xl object-cover
+             transition-transform duration-200 ease-out
+             will-change-transform"> <script>
+      const fig   = /** @type {HTMLElement} */ (document.currentScript.parentElement);
+      const img   = fig.querySelector('#parallax-img');
+      const range = 12;
+      function handleMove(e) {
+        const rect = fig.getBoundingClientRect();
+        const x    = e.clientX - rect.left - rect.width  / 2;
+        const y    = e.clientY - rect.top  - rect.height / 2;
+        const rx   = (-y / (rect.height / 1.25)) * range;
+        const ry   = ( x / (rect.width  / 1.25)) * range;
+        img.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.05)`;
+      }
+      function reset() {
+        img.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+      }
+      fig.addEventListener('mousemove', handleMove);
+      fig.addEventListener('mouseleave', reset);
+    </script> </figure> <!-- ✨ TEXT – right on desktop --> <div class="space-y-6 order-1 md:order-2
+      mt-10 md:mt-0 relative
+    opacity-0 translate-x-6         
+    transition-all duration-700 ease-out
+    delay-800
+    motion-reduce:opacity-100 motion-reduce:translate-y-0
+  " data-fade> <h1 class="
+        text-5xl font-extrabold leading-tight
+        opacity-0 translate-x-6            /* enter from right */
+        transition-all duration-700 ease-out
+        delay-800
+        motion-reduce:opacity-100 motion-reduce:translate-x-0
+      " data-fade> Professional Experience </h1> <h2 class="
+        text-4xl font-semibold
+        opacity-0 translate-x-6
+        transition-all duration-700 ease-out
+        delay-800
+        motion-reduce:opacity-100 motion-reduce:translate-x-0
+      " data-fade> A brief overview of my work history </h2> <p class="
+        text-lg
+        opacity-0 translate-x-6
+        transition-all duration-700 ease-out
+        delay-800
+        motion-reduce:opacity-100 motion-reduce:translate-x-0
+      " data-fade> With extensive experience in full-stack development, data analysis, and automation, I create and optimize digital solutions to streamline business operations and enhance user experiences. </p> <div class="flex gap-4"> <a href="/src/data/YashPatelResume.pdf" target="_blank" rel="noopener noreferrer" aria-label="Email me" class="flex items-center gap-2 px-4 py-2 border rounded-lg hover:bg-[#9C84EE]/10 transition-colors"> <svg width="24" height="24" data-icon="simple-icons:googledocs">   <symbol id="ai:simple-icons:googledocs" viewBox="0 0 24 24"><path fill="currentColor" d="M14.727 6.727H14V0H4.91c-.905 0-1.637.732-1.637 1.636v20.728c0 .904.732 1.636 1.636 1.636h14.182c.904 0 1.636-.732 1.636-1.636V6.727zm-.545 10.455H7.09v-1.364h7.09v1.364zm2.727-3.273H7.091v-1.364h9.818zm0-3.273H7.091V9.273h9.818zM14.727 6h6l-6-6z"/></symbol><use href="#ai:simple-icons:googledocs"></use>  </svg> <span class="font-medium">Download my resume</span> </a> <a href="https://linkedin.com/in/yash-n-patel" target="_blank" rel="noopener noreferrer" aria-label="Email me" class="flex items-center gap-2 px-4 py-2 border rounded-lg hover:bg-[#9C84EE]/10 transition-colors"> <svg width="24" height="24" viewBox="0 0 24 24" data-icon="simple-icons:linkedin">   <use href="#ai:simple-icons:linkedin"></use>  </svg> <span class="font-medium">Connect with me on LinkedIn</span> </a> </div> </div> </section> <section id="work" class="mx-auto max-w-7xl px-6 py-5"> <!-- Heading --> <h2 class="
+      text-4xl font-bold text-current
+      opacity-0 translate-x-6 transform
+      transition-opacity transition-transform
+      duration-700 ease-out delay-200
+    " data-fade> Projects &amp; Experience </h2> <!-- Grid of cards --> <div class="
+    mt-12
+    grid
+    gap-6
+    grid-cols-[repeat(auto-fit,minmax(14rem,1fr))]
+      opacity-0 translate-x-6 transform
+      transition-opacity transition-transform
+      duration-700 ease-out delay-300
+    " data-fade> <a href="https://www.brucepower.com" target="_blank" rel="noopener noreferrer" aria-label="As a Development Student at Bruce Power, I led full-stack development using PHP, JavaScript, and SQL to automate and streamline supplier performance scorecard processes, achieving a 40% reduction in monthly reporting time and enhancing data accuracy. I managed supplier performance assessments with Tier 1 and Tier 2 suppliers, focusing on safety, quality, cost, capacity, and schedule metrics. Additionally, I implemented process automations and applied predictive modeling techniques using machine learning to forecast financial and operational outcomes, improving overall supply chain efficiency." class="block" data-tilt style="perspective: 800px;"> <div class="
+        tilt-content                <!-- new! -->
+        flex flex-col h-full
+        overflow-hidden rounded-lg
+        bg-current/5
+        border border-gray-200 dark:border-gray-700
+        shadow-sm
+        transition-transform transition-shadow duration-400 ease-out
+        hover:scale-105
+      " style="aspect-ratio:3/4;"> <div class="flex-shrink-0 p-4 flex items-start justify-center"> <img src="src/images/bruce.png" alt="bruce power logo" loading="lazy" class="
+          p-3
+            max-w-full max-h-full
+            object-contain
+            transform scale-95
+            border-b-4 border-current/20 rounded-lg
+          "> </div> <div class="mt-[3px] px-4 text-center"> <p class="text-sm font-medium text-current">As a Development Student at Bruce Power, I led full-stack development using PHP, JavaScript, and SQL to automate and streamline supplier performance scorecard processes, achieving a 40% reduction in monthly reporting time and enhancing data accuracy. I managed supplier performance assessments with Tier 1 and Tier 2 suppliers, focusing on safety, quality, cost, capacity, and schedule metrics. Additionally, I implemented process automations and applied predictive modeling techniques using machine learning to forecast financial and operational outcomes, improving overall supply chain efficiency.</p> </div> </div> </a><a href="/" target="_blank" rel="noopener noreferrer" aria-label="2" class="block" data-tilt style="perspective: 800px;"> <div class="
+        tilt-content                <!-- new! -->
+        flex flex-col h-full
+        overflow-hidden rounded-lg
+        bg-current/5
+        border border-gray-200 dark:border-gray-700
+        shadow-sm
+        transition-transform transition-shadow duration-400 ease-out
+        hover:scale-105
+      " style="aspect-ratio:3/4;"> <div class="flex-shrink-0 p-4 flex items-start justify-center"> <img src="src/images/bruce.png" alt="2" loading="lazy" class="
+          p-3
+            max-w-full max-h-full
+            object-contain
+            transform scale-95
+            border-b-4 border-current/20 rounded-lg
+          "> </div> <div class="mt-[3px] px-4 text-center"> <p class="text-sm font-medium text-current">2</p> </div> </div> </a><a href="/" target="_blank" rel="noopener noreferrer" aria-label="3" class="block" data-tilt style="perspective: 800px;"> <div class="
+        tilt-content                <!-- new! -->
+        flex flex-col h-full
+        overflow-hidden rounded-lg
+        bg-current/5
+        border border-gray-200 dark:border-gray-700
+        shadow-sm
+        transition-transform transition-shadow duration-400 ease-out
+        hover:scale-105
+      " style="aspect-ratio:3/4;"> <div class="flex-shrink-0 p-4 flex items-start justify-center"> <img src="src/images/bruce.png" alt="3" loading="lazy" class="
+          p-3
+            max-w-full max-h-full
+            object-contain
+            transform scale-95
+            border-b-4 border-current/20 rounded-lg
+          "> </div> <div class="mt-[3px] px-4 text-center"> <p class="text-sm font-medium text-current">3</p> </div> </div> </a> </div> </section> <section id="photography" class="mx-auto max-w-7xl px-6 py-24 
+         md:grid md:grid-cols-2 md:gap-12 
+         items-center"> <!-- 📸 IMAGE – left on desktop --> <figure data-tilt class="
+      mt-10 md:mt-0 relative
+      opacity-0 -translate-x-6         /* enter from left */
+      transition-all duration-700 ease-out
+      motion-reduce:opacity-100 motion-reduce:translate-x-0
+      order-2 md:order-1               /* mobile: below, md+: first */
+    " data-fade style="perspective: 1200px"> <img id="parallax-img" src="/src/images/pro2.jpg" alt="Yash standing in the middle of a city street" loading="lazy" class="w-full rounded-3xl object-cover
+             transition-transform duration-200 ease-out
+             will-change-transform"> <script>
+      const fig   = /** @type {HTMLElement} */ (document.currentScript.parentElement);
+      const img   = fig.querySelector('#parallax-img');
+      const range = 12;
+      function handleMove(e) {
+        const rect = fig.getBoundingClientRect();
+        const x    = e.clientX - rect.left - rect.width  / 2;
+        const y    = e.clientY - rect.top  - rect.height / 2;
+        const rx   = (-y / (rect.height / 1.25)) * range;
+        const ry   = ( x / (rect.width  / 1.25)) * range;
+        img.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.05)`;
+      }
+      function reset() {
+        img.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+      }
+      fig.addEventListener('mousemove', handleMove);
+      fig.addEventListener('mouseleave', reset);
+    </script> </figure> <!-- ✨ TEXT – right on desktop --> <div class="space-y-6 order-1 md:order-2"> <h1 class="
+        text-5xl font-extrabold leading-tight
+        opacity-0 translate-x-6            /* enter from right */
+        transition-all duration-700 ease-out
+        delay-0
+        motion-reduce:opacity-100 motion-reduce:translate-x-0
+      " data-fade> Did I mention that I take photos? </h1> <h2 class="
+        text-4xl font-semibold
+        opacity-0 translate-x-6
+        transition-all duration-700 ease-out
+        delay-100
+        motion-reduce:opacity-100 motion-reduce:translate-x-0
+      " data-fade>  </h2> <p class="
+        text-lg
+        opacity-0 translate-x-6
+        transition-all duration-700 ease-out
+        delay-200
+        motion-reduce:opacity-100 motion-reduce:translate-x-0
+      " data-fade> Over five years (and counting) behind the lens! </p> <a href="https://piwigo.darkishlocket10.me" target="_blank" rel="noopener noreferrer" aria-label="Email me" class="flex items-center gap-2 px-4 py-2 border rounded-lg hover:bg-[#9C84EE]/10 transition-colors"> <svg width="24" height="24" viewBox="0 0 24 24" data-icon="simple-icons:googledocs">   <use href="#ai:simple-icons:googledocs"></use>  </svg> <span class="font-medium">Check out my self-hosted photo gallery!</span> </a> </div> </section> <div class="max-w-6xl mx-auto px-4"> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var A=Object.defineProperty;var g=(i,o,a)=>o in i?A(i,o,{enumerable:!0,configurable:!0,writable:!0,value:a}):i[o]=a;var d=(i,o,a)=>g(i,typeof o!="symbol"?o+"":o,a);{let i={0:t=>m(t),1:t=>a(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(a(t)),5:t=>new Set(a(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>1/0*t},o=t=>{let[l,e]=t;return l in i?i[l](e):void 0},a=t=>t.map(o),m=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([l,e])=>[l,o(e)]));class y extends HTMLElement{constructor(){super(...arguments);d(this,"Component");d(this,"hydrator");d(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let c=this.querySelectorAll("astro-slot"),n={},h=this.querySelectorAll("template[data-astro-template]");for(let r of h){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of c){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("name")||"default"]=r.innerHTML)}let p;try{p=this.hasAttribute("props")?m(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(s+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}let u;await this.hydrator(this)(this.Component,p,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});d(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),c.disconnect(),this.childrenConnectedCallback()},c=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});c.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}async start(){let e=JSON.parse(this.getAttribute("opts")),c=this.getAttribute("client");if(Astro[c]===void 0){window.addEventListener(`astro:${c}`,()=>this.start(),{once:!0});return}try{await Astro[c](async()=>{let n=this.getAttribute("renderer-url"),[h,{default:p}]=await Promise.all([import(this.getAttribute("component-url")),n?import(n):()=>()=>{}]),u=this.getAttribute("component-export")||"default";if(!u.includes("."))this.Component=h[u];else{this.Component=h;for(let f of u.split("."))this.Component=this.Component[f]}return this.hydrator=p,this.hydrate},e,this)}catch(n){console.error(`[astro-island] Error hydrating ${this.getAttribute("component-url")}`,n)}}attributeChangedCallback(){this.hydrate()}}d(y,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",y)}})();</script><astro-island uid="Zmb7dQ" prefix="r1" component-url="/_astro/MySwiper.D6hCL6zw.js" component-export="default" renderer-url="/_astro/client.BxCTEn3I.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;MySwiper&quot;,&quot;value&quot;:true}" await-children><link rel="preload" as="image" href="https://piwigo.darkishlocket10.me/_data/i/upload/2025/03/01/20250301202330-2d6bec2d-la.jpg"/><link rel="preload" as="image" href="https://piwigo.darkishlocket10.me/_data/i/upload/2025/03/29/20250329031845-add54cca-la.jpg"/><link rel="preload" as="image" href="https://piwigo.darkishlocket10.me/_data/i/upload/2025/02/19/20250219181031-65d3f3e1-la.jpg"/><link rel="preload" as="image" href="https://piwigo.darkishlocket10.me/_data/i/upload/2025/02/18/20250218213833-079c74d3-la.jpg"/><link rel="preload" as="image" href="https://piwigo.darkishlocket10.me/_data/i/upload/2025/06/11/20250611191605-5bc508af-xl.jpg"/><link rel="preload" as="image" href="https://piwigo.darkishlocket10.me/i.php?/upload/2025/06/11/20250611184555-6c2aa0d7-la.jpg"/><div class="swiper"><div class="swiper-wrapper"><div class="swiper-slide"><div style="position:relative;width:100%;padding-top:56.25%;overflow:hidden;border-radius:1.5rem"><img src="https://piwigo.darkishlocket10.me/_data/i/upload/2025/03/01/20250301202330-2d6bec2d-la.jpg" alt="Slide 1" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:1.5rem"/></div></div><div class="swiper-slide"><div style="position:relative;width:100%;padding-top:56.25%;overflow:hidden;border-radius:1.5rem"><img src="https://piwigo.darkishlocket10.me/_data/i/upload/2025/03/29/20250329031845-add54cca-la.jpg" alt="Slide 2" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:1.5rem"/></div></div><div class="swiper-slide"><div style="position:relative;width:100%;padding-top:56.25%;overflow:hidden;border-radius:1.5rem"><img src="https://piwigo.darkishlocket10.me/_data/i/upload/2025/02/19/20250219181031-65d3f3e1-la.jpg" alt="Slide 3" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:1.5rem"/></div></div><div class="swiper-slide"><div style="position:relative;width:100%;padding-top:56.25%;overflow:hidden;border-radius:1.5rem"><img src="https://piwigo.darkishlocket10.me/_data/i/upload/2025/02/18/20250218213833-079c74d3-la.jpg" alt="Slide 4" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:1.5rem"/></div></div><div class="swiper-slide"><div style="position:relative;width:100%;padding-top:56.25%;overflow:hidden;border-radius:1.5rem"><img src="https://piwigo.darkishlocket10.me/_data/i/upload/2025/06/11/20250611191605-5bc508af-xl.jpg" alt="Slide 5" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:1.5rem"/></div></div><div class="swiper-slide"><div style="position:relative;width:100%;padding-top:56.25%;overflow:hidden;border-radius:1.5rem"><img src="https://piwigo.darkishlocket10.me/i.php?/upload/2025/06/11/20250611184555-6c2aa0d7-la.jpg" alt="Slide 6" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:1.5rem"/></div></div></div><div class="swiper-button-prev"></div><div class="swiper-button-next"></div><div class="swiper-scrollbar"></div><div class="swiper-pagination"></div></div><!--astro:end--></astro-island> </div>  <footer> <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; font-size: 1.1rem; padding: 1rem 2rem;"> <span>© Yash Patel. All rights reserved.</span> <a href="#" style="text-decoration: none; color: inherit; font-weight: bold;">Back to top ↑</a> </div> </footer> <script>
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            /* Remove *all* translate classes you started with */
+            entry.target.classList.remove(
+              'opacity-0',
+              'translate-y-6',
+              '-translate-y-6',
+              'translate-x-6',
+              '-translate-x-6'
+            );
+            obs.unobserve(entry.target);   // reveal only once
+          }
+        });
+      }, { rootMargin: '0px 0px -10%', threshold: 0.1 });
+
+      document.querySelectorAll('[data-fade]').forEach(el => io.observe(el));
+    </script> <script>
+  document.querySelectorAll('figure[data-tilt]').forEach(fig => {
+    const img = fig.querySelector('img');
+    const range = 12;
+    function handleMove(e) {
+      const rect = fig.getBoundingClientRect();
+      const x = e.clientX - rect.left  - rect.width/2;
+      const y = e.clientY - rect.top   - rect.height/2;
+      const rx = (-y/(rect.height/1.25))*range;
+      const ry = ( x/(rect.width/1.25))*range;
+      img.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.05)`;
+    }
+    function reset() {
+      img.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+    }
+    fig.addEventListener('mousemove', handleMove);
+    fig.addEventListener('mouseleave', reset);
+  });
+</script> <script>
+  document.querySelectorAll('[data-tilt]').forEach((container) => {
+    const content = container.querySelector('.tilt-content');
+    const range   = 4;  // max degrees of tilt; reduce for a subtler effect
+
+    function handleMove(e) {
+      const rect = container.getBoundingClientRect();
+      const x    = (e.clientX - rect.left  - rect.width  / 2) / (rect.width  / 2);
+      const y    = (e.clientY - rect.top   - rect.height / 2) / (rect.height / 2);
+      content.style.transform = `
+        rotateX(${(-y * range).toFixed(2)}deg)
+        rotateY(${( x * range).toFixed(2)}deg)
+      `;
+    }
+
+    function reset() {
+      content.style.transform = 'rotateX(0) rotateY(0)';
+    }
+
+    container.addEventListener('mousemove', handleMove);
+    container.addEventListener('mouseleave', reset);
+  });
+</script> </body> </html>
