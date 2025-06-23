@@ -11,7 +11,7 @@ import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://yashnilay.ca',
+  site: 'yashnilay.ca',
   vite: { plugins: [tailwindcss()] },
   integrations: [react(), icon()], 
 });
